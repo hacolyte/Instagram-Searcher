@@ -1,16 +1,14 @@
 .header-dark{
-	color: #ffffff;
-	background-color: #3BAFDA;
-	padding: 4em;
+  color: #ffffff;
+	background-color: #125688;
 }
 
-.main-section-light{
-	background-color: #4FC1E9;
-	height:20em;
+.form-background{
+	background-color: #125688;
 }
 
 .input-group.form-search{
-	padding: 2em 0 0 0;
+	padding: 2em 0;
 }
 
 .input-group-addon:not(:first-child):not(:last-child), 
@@ -30,6 +28,14 @@
   -moz-border-bottom-left-radius: 17px !important;
 }
 
+.progress-margin{
+	margin-top: 1em;
+}
+
 .error{
 	color:#E9573F;
+}
+
+h4.text-center{
+	color: white;
 }

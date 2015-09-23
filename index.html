@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Instagram Searcher</title>
     <link rel="stylesheet" href="/css/style.css"></link>
-    <link rel="stylesheet" href="/bower_components/animate.css/animate.min.js"></link>
+    <link rel="stylesheet" href="/bower_components/animate.css/animate.min.css"></link>
     <link rel="stylesheet" href="/bower_components/Bootflat/css/bootstrap.min.css">
     <link rel="stylesheet" href="/bower_components/Bootflat/bootflat/css/bootflat.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,32 +13,46 @@
     <header class="container header-dark">
         <h1 class="text-center">Instagram Searcher</h1>
     </header>
-    <section class="container main-section-light" ng-controller="searchController">
+    <section class="container form-background" ng-controller="searchController">
         <div class="row">
             <form name="searchForm" novalidate>
                 <div class="input-group form-search col-md-6 col-md-offset-3">
-                    <input type="text" class="form-control search-query" name="searchText" ng-model="data.searchText" required />
+                    <input type="text" class="form-control search-query" name="searchText" placeholder="Please Enter a Search Tag" ng-model="data.searchText" required />
                     <span class="input-group-btn">
-                        <button type="submit" class="btn btn-primary" ng-click="submit()">Search</button>
+                        <button type="submit" class="btn btn-warning" ng-click="search()">Search</button>
                     </span>
                 </div>
-                <div class="error col-md-6 col-md-offset-3 text-center" ng-if="searchForm.$submitted" ng-messages="searchForm.searchText.$error">
+                <div class="error col-md-6 col-md-offset-3 text-center" ng-if="submitted && searchForm.searchText.$error" ng-messages="searchForm.searchText.$error">
                     <label class="control-label" ng-message="required">Please Enter a Keyword</label>
                 </div>
             </form>
-        </row>
-        <div class="row">
-            <div class='col-md-6 col-md-offset-3'>
-                <div class="progress">
+        </div>
+        <div class="row" ng-if="searching">
+            <div class='col-md-4 col-md-offset-4'>
+                <div class="progress progress-margin">
                   <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                    <span class="sr-only">45% Complete</span>
                   </div>
                 </div>
-                <h3 class="text-center">Searching Instagram...</h3>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4"></div>
+        <div class="row" ng-if="alert">
+            <div class='col-md-4 col-md-offset-4 text-center'>
+                <h4 class="error">A Server Error Has Occurred.</h4>
+            </div>
+        </div>
+        <div class="row" ng-if="imagesFound">
+            <div class='col-md-4 col-md-offset-4'>
+                <h4 class="text-center">{{images.length}} results found.</h4>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-md-3 animated bounceInUp" ng-repeat="image in images">
+                <div class="thumbnail">
+                    <a href="{{image.link}}">
+                        <img ng-src="{{image.images.thumbnail.url}}" height="150" width="150" />
+                    </a>
+                </div>  
+            </div>
         </div>
     </section>
     
